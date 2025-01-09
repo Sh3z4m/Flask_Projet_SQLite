@@ -39,6 +39,21 @@ def authentification():
 
     return render_template('formulaire_authentification.html', error=False)
 
+@app.route('/authentification_recherche', methods=['GET', 'POST'])
+def authentification_recherche():
+    if request.method == 'POST':
+        # Vérifier les identifiants
+        if request.form['username'] == 'user' and request.form['password'] == '12345': # password à cacher par la suite
+            session['authentifierecherche'] = True
+            # Rediriger vers la route lecture après une authentification réussie
+            return redirect(url_for('/fiche_nom/'))
+        else:
+            # Afficher un message d'erreur si les identifiants sont incorrects
+            return render_template('formulaire_authentification.html', error=True)
+
+    return render_template('formulaire_authentification.html', error=False)
+
+
 @app.route('/fiche_client/<int:post_id>')
 def Readfiche(post_id):
     conn = sqlite3.connect('database.db')
@@ -60,6 +75,10 @@ def ReadBDD():
 
 @app.route('/fiche_nom/')
 def ReadBDD_2():
+    if not est_authentifierecherche():
+        # Rediriger vers la page d'authentification si l'utilisateur n'est pas authentifié
+        return redirect(url_for('authentification_recherche'))
+    
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM clients;')
