@@ -52,9 +52,9 @@ def authentification_recherche():
             return redirect(url_for('/fiche_nom/'))
         else:
             # Afficher un message d'erreur si les identifiants sont incorrects
-            return render_template('formulaire_authentification.html', error=True)
+            return render_template('formulaire_authentification_recherche.html', error=True)
 
-    return render_template('formulaire_authentification.html', error=False)
+    return render_template('formulaire_authentification_recherche.html', error=False)
 
 
 @app.route('/fiche_client/<int:post_id>')
