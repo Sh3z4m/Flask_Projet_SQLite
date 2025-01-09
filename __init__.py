@@ -15,10 +15,16 @@ def est_authentifie():
 @app.route('/')
 def hello_world():
     return render_template('hello.html')
-    
+
+# Fiche Nom
 @app.route('/fiche_nom')
-def recherche():
-    return render_template('search_data.html')
+def ReadBDD():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM clients;')
+    data = cursor.fetchall()
+    conn.close()
+    return render_template('search_data.html', data=data)
 
 @app.route('/lecture')
 def lecture():
@@ -60,16 +66,9 @@ def ReadBDD_consult():
     cursor.execute('SELECT * FROM clients;')
     data = cursor.fetchall()
     conn.close()
-    return render_template('search_data.html', data=data)
-
-@app.route('/fiche_nom')
-def ReadBDD():
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM clients;')
-    data = cursor.fetchall()
-    conn.close()
     return render_template('read_data.html', data=data)
+
+
 
 @app.route('/enregistrer_client', methods=['GET'])
 def formulaire_client():
