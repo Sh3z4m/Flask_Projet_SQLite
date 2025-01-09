@@ -15,6 +15,10 @@ def est_authentifie():
 @app.route('/')
 def hello_world():
     return render_template('hello.html')
+    
+@app.route('/fiche_nom')
+def recherche():
+    return render_template('search_data.html')
 
 @app.route('/lecture')
 def lecture():
