@@ -65,7 +65,7 @@ def ReadBDD_2():
     cursor.execute('SELECT * FROM clients;')
     data = cursor.fetchall()
     conn.close()
-    return render_template('read_data.html', data=data)
+    return render_template('search_data.html', data=data)
 
 @app.route('/enregistrer_client', methods=['GET'])
 def formulaire_client():
