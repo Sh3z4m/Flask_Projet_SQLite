@@ -73,7 +73,7 @@ def recherche_client():
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM clients;')
+    cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
     data = cursor.fetchall()
     conn.close()
     return render_template('search_data_result.html', data=data)
