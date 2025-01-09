@@ -76,7 +76,7 @@ def recherche_client():
     cursor.execute('SELECT * FROM clients;')
     data = cursor.fetchall()
     conn.close()
-    return render_template('search_data.html', data=data)
+    return render_template('search_data_result.html', data=data)
 
 
 @app.route('/enregistrer_client', methods=['GET'])
