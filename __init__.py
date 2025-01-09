@@ -58,7 +58,7 @@ def ReadBDD():
     conn.close()
     return render_template('read_data.html', data=data)
 
-@app.route('/fiche_nom')
+@app.route('/fiche_nom/')
 def ReadBDD_2():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
